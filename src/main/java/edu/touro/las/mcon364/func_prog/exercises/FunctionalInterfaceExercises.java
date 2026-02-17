@@ -2,6 +2,8 @@ package edu.touro.las.mcon364.func_prog.exercises;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -40,7 +42,7 @@ public class FunctionalInterfaceExercises {
      */
     public static Supplier<Integer> currentYearSupplier() {
       // TODO
-        return null;
+        return () -> LocalDate.now().getYear();
     }
 
     /**
@@ -49,7 +51,7 @@ public class FunctionalInterfaceExercises {
      */
     public static Supplier<Integer> randomScoreSupplier() {
         // TODO
-        return null;
+        return () -> ThreadLocalRandom.current().nextInt(1, 100);
     }
 
     // =========================================================
@@ -61,8 +63,7 @@ public class FunctionalInterfaceExercises {
      * a string is all uppercase.
      */
     public static Predicate<String> isAllUpperCase() {
-        // TODO
-        return null;
+        return s-> Objects.equals(s, s.toUpperCase());
     }
 
     /**
@@ -73,7 +74,7 @@ public class FunctionalInterfaceExercises {
      */
     public static Predicate<Integer> positiveAndDivisibleByFive() {
         // TODO
-        return null;
+        return  num->(num>0 && num % 5==0);
     }
 
     // =========================================================
@@ -88,7 +89,8 @@ public class FunctionalInterfaceExercises {
      */
     public static Function<Double, Double> celsiusToFahrenheit() {
         // TODO
-        return null;
+
+        return temp->(temp *(9/5)+ 32);
     }
 
     /**
@@ -99,6 +101,11 @@ public class FunctionalInterfaceExercises {
      */
     public static Function<String, Integer> countVowels() {
         // TODO
+       String str="";
+        String vowels="aeiou";
+        for(int i=0; i<str.length();i++ ){
+            if (str.indexOf(i).)
+        }
         return null;
     }
 
