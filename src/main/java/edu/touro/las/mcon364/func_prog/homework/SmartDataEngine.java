@@ -1,7 +1,9 @@
 package edu.touro.las.mcon364.func_prog.homework;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.function.*;
 
 /**
@@ -45,6 +47,12 @@ public class SmartDataEngine {
             Consumer<R> consumer
     ) {
         // TODO
+        for(T type: input){
+            if(filter.test(type)){
+                R result=mapper.apply(type);
+                consumer.accept(result);
+            }
+        }
     }
 
     // ============================================================
@@ -60,7 +68,9 @@ public class SmartDataEngine {
      */
     public static Optional<Double> safeDivide(double a, double b) {
         // TODO
-        return Optional.empty();
+        if(b==0)
+            return Optional.empty();
+        return Optional.of(a/b);
     }
 
     /**
@@ -79,7 +89,8 @@ public class SmartDataEngine {
      */
     public static double processDivision(double a, double b) {
         // TODO
-        return 0;
+        return safeDivide(a, b).map(s->s*10.0).orElse(-1.0);
+
     }
 
     // ============================================================
@@ -109,7 +120,12 @@ public class SmartDataEngine {
         //     default -> ...
         // };
 
-        return null;
+        return switch(input){
+            case Integer i-> i*i;
+            case  String s ->s.toUpperCase();
+            case Double d -> Math.round(d);
+            default -> "Unsupported";
+        };
     }
 
     // ============================================================
@@ -147,7 +163,10 @@ public class SmartDataEngine {
 
     public static Function<String, Integer> buildStringLengthPipeline() {
         // TODO
-        return null;
+        Function<String,String> trim= String::trim;
+        Function<String,String> lowerCase= String::toLowerCase;
+        Function<String,Integer> len=String::length;
+        return trim.andThen(lowerCase).andThen(len);
     }
 
     // ============================================================
@@ -180,14 +199,24 @@ public class SmartDataEngine {
      * Think in terms of behavior injection:
      *  - The pipeline should NOT know how random numbers are created.
      *  - The pipeline should NOT know how formatting works.
-     *
      * It should only orchestrate the behavior passed to it.
-     *
      * This method integrates everything you learned in this project.
      */
 
     public static void runScoreProcessor() {
-        // TODO
+        Supplier<Integer> randomNum= ()-> {
+            Random random= new Random();
+            return random.nextInt(101);
+        };
+        Predicate<Integer> filter= num-> num>50;
+        Function<Integer,String> convert= integer -> "Score: " + integer.toString();
+        Consumer<String> result= System.out::println;
+        List<Integer> list= new ArrayList<Integer>();
+        for(int i=0;i<9;i++){
+            list.add(randomNum.get());
+        }
+        pipeline(list,filter,convert,result);
+
     }
 
 }
