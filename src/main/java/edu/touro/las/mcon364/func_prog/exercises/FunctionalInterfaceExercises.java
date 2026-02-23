@@ -161,7 +161,7 @@ public class FunctionalInterfaceExercises {
     public static void processStrings(List<String> values) {
         // TODO
 
-        Predicate<String> stringsOfThree = (s) -> s.length() >= 3;
+        Predicate<String> stringsOfThree = (s) -> s.length() > 3;
         Function<String, String> lowerCase = String::toLowerCase;
         Consumer<List<String>> printS = v-> {
             for (String str :v) {
