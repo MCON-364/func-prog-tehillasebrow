@@ -45,6 +45,12 @@ public class SmartDataEngine {
             Consumer<R> consumer
     ) {
         // TODO
+        for(T type: input){
+            if(filter.test(type)){
+                R result=mapper.apply(type);
+                consumer.accept(result);
+            }
+        }
     }
 
     // ============================================================

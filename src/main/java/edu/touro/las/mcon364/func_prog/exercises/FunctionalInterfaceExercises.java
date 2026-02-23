@@ -92,7 +92,7 @@ public class FunctionalInterfaceExercises {
     public static Function<Double, Double> celsiusToFahrenheit() {
         // TODO
 
-        return temp -> (temp * (9 / 5) + 32);
+        return temp -> (temp * (9.0 / 5.0) + 32);
     }
 
     /**
@@ -202,7 +202,7 @@ public class FunctionalInterfaceExercises {
                     System.out.println(integer);
             }
         };
-        printAbove70.accept(numGenerator);
+        printAbove70.accept(numGenerator.get());
     }
 }
 
